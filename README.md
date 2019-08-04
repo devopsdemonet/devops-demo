@@ -2,12 +2,12 @@
 
 This docker-compose container set allows one to demonstrate the critical features and components of a traditional DevOps process.
 
-# Prerequisites:
+### Prerequisites:
 
 To use this on a Mac or Windows host, make sure that this setting in Docker Desktop is enabled:
 "Expose daemon on tcp://localhost:2375 without TLS"
 
-# Docker compose setup
+### Docker compose setup
 
 Once you've cloned the repo do:
 ```
@@ -21,7 +21,7 @@ Look for "Up (healty) for the state of the gitlab container:
 docker-compose ps
 ```
 
-# Gitlab setup
+### Gitlab setup
 
 Once the container is healthy, connect to it via web browser
 Navigate to: http://localhost
@@ -70,6 +70,6 @@ Navigate to: http://localhost/root/node-web-app to see that the repo has been up
 
 The contents should match the existing repo: https://github.com/devopsdemonet/node-web-app
 
-# Jenkins Setup
+### Jenkins Setup
 
 
