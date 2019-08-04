@@ -132,8 +132,13 @@ docker image rm --force $(docker images | grep node-web-app)
 
 #### TODO:
 Add how-to for running node watch to do live dev tests
+
 Add git plugin to jenkins and build on commit watch to jenkins job
+
 Add sonarqube or other code quality test instrumentation to buid process
+
 Add selenium testing
+
 Add security testing
+
 Add deployment scenario
