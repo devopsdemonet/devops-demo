@@ -70,6 +70,70 @@ Navigate to: http://localhost/root/node-web-app to see that the repo has been up
 
 The contents should match the existing repo: https://github.com/devopsdemonet/node-web-app
 
-### Jenkins Setup
+### Jenkins/Docker build job setup
 
+The custom jenkins image that was built from the Dockerfile in this repo has the docker cli client baked into the image. The client will be use to connect back to the Docker Desktop running locally on Windows or Mac computer to build/run containers.
 
+Note: This jenkins setup skips using any plugins to maintain strict simplicity.
+
+Navigate to: http://localhost:8080/view/all/newJob
+
+Enter a name like "node-web-app"
+
+Click "Freestyle project"
+
+Click "OK"
+
+Scroll down to the "Build" section
+
+Click "Add build step > Execute shell"
+
+In the box that appears in "Execute shell > Command" insert the following code:
+```
+rm -rf $(ls -a | tail -n +3) #quick hack to clean up the folder on each job run, due to no workspace cleanup plugin installed yet
+git clone https://github.com/devopsdemonet/node-web-app.git
+export DOCKER_HOST=tcp://docker.for.win.localhost:2375 #on a mac change to: export DOCKER_HOST=tcp://docker.host.internal:2375
+docker build -t node-web-app:${BUILD_ID} .
+docker tag node-web-app:${BUILD_ID} node-web-app:latest
+```
+
+Scroll down and click "Save"
+
+When the job page reloads, click "Build Now" in the left hand column
+
+Check the job log to see the image was built
+
+Verify the image was built on your system using:
+```
+docker images | grep node-web-app
+```
+
+### Docker test
+
+Run the image:
+```
+docker run -p 49160:8080 -d node-web-app
+```
+
+Verify its running with:
+```
+curl -i localhost:49160
+```
+
+Or by navigating to http://localhost:49160 in your web browser
+
+You should see "Hello world" displayed on the page or in the curl output
+
+#### Cleanup
+To remove all docker images created by this:
+```
+docker image rm --force $(docker images | grep node-web-app)
+```
+
+#### TODO:
+Add how-to for running node watch to do live dev tests
+Add git plugin to jenkins and build on commit watch to jenkins job
+Add sonarqube or other code quality test instrumentation to buid process
+Add selenium testing
+Add security testing
+Add deployment scenario
