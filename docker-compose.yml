@@ -1,0 +1,16 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce
+    ports:
+    - 443:443/tcp
+    - 80:80/tcp
+    - 22:22/tcp
+  jenkins:
+    build:
+      context: .
+    environment:
+      JAVA_OPTS: -Djenkins.install.runSetupWizard=false
+    ports:
+    - 8080:8080/tcp
+    - 50000:50000/tcp
+version: '3.7'
