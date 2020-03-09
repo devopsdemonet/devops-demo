@@ -105,7 +105,7 @@ Click "Add build step > Execute shell"
 In the box that appears in "Execute shell > Command" insert the following code:
 ```
 rm -rf $(ls -a | tail -n +3) #quick hack to clean up the folder on each job run, due to no workspace cleanup plugin installed yet
-git clone https://github.com/devopsdemonet/node-web-app.git
+git clone http://devops-demo_gitlab_1.devops-demo_default/root/node-web-app.git
 #export DOCKER_HOST=tcp://docker.for.win.localhost:2375 #on windows uncomment this line
 cd $WORKSPACE/node-web-app
 docker build -t node-web-app:${BUILD_ID} .
@@ -138,6 +138,13 @@ curl -i localhost:49160
 Or by navigating to http://localhost:49160 in your web browser
 
 You should see "Hello world" displayed on the page or in the curl output
+
+Stop the container with:
+
+
+###
+
+To demonstrate the quick iteration capablities of the combination of Jenkins and code in the gitlab repo, just edit the line 12 of the node-web-app server.js file inside the quotes. Change ('Hello world\n') to ('Hello new world\n'), commit the change directly in the gitlab web interface and then run the Jenkins build job again. After the change if you run the new node-web-app container, you will see the changes in the curl output.
 
 #### Cleanup
 To remove all docker images created by this:
