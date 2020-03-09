@@ -58,13 +58,21 @@ Under "Project name," enter "node-web-app" in the text box
 
 Under "Visiblity Level," click the "Public" radio button
 
-On your local system clone the "node-web-app" repo from this existing repo: https://github.com/devopsdemonet/node-web-app
+Click "Create Project"
+
+### Local repo clone of node-web-app project
+
+Switch to a local terminal window
+
+Clone the "node-web-app" repo from this existing repo: https://github.com/devopsdemonet/node-web-app
 
 Change to the newly cloned folder and delete the .git folder. Then re-initialize w/new remote origin and push up to Gitlab
 ```
 git clone https://github.com/devopsdemonet/node-web-app.git
 cd node-web-app
-rm -Force -Recurse .git # rm -rf .get on a mac
+rm -rf .git
+#on a windows system uncomment the below line and comment out the above line
+#rm -Force -Recurse .git 
 git init
 git remote add origin http://localhost/root/node-web-app.git
 git add .
