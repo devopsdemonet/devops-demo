@@ -9,14 +9,20 @@ To use this on a Windows host, make sure that this setting in Docker Desktop is 
 
 ### Docker compose setup
 
-Once you've cloned the repo do:
+On OSX, once you've cloned the repo do:
 ```
 cd devops-demo
 docker-compose up -d
 ```
 
+On Windows do:
+```
+cd devops-demo
+docker-compose -f docker-compose-win.yml up -d
+```
+
 Wait a minute or two for the containers come up.
-Look for "Up (healty) for the state of the gitlab container:
+Look for "Up (healty)" for the state of the gitlab container:
 ```
 docker-compose ps
 ```
