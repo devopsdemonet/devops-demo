@@ -139,12 +139,14 @@ Or by navigating to http://localhost:49160 in your web browser
 
 You should see "Hello world" displayed on the page or in the curl output
 
-Stop the container with:
-
+Stop and remove the container with:
+```
+docker stop $(docker ps -a | grep node-web-app | awk '{ print $1 }') && docker rm $(docker ps -a | grep node-web-app | awk '{ print $1 }')
+```
 
 ###
 
-To demonstrate the quick iteration capablities of the combination of Jenkins and code in the gitlab repo, just edit the line 12 of the node-web-app server.js file inside the quotes. Change ('Hello world\n') to ('Hello new world\n'), commit the change directly in the gitlab web interface and then run the Jenkins build job again. After the change if you run the new node-web-app container, you will see the changes in the curl output.
+To demonstrate the quick iteration capablities of the combination of Jenkins and code in the gitlab repo, just edit the line 12 of the node-web-app server.js file directly on the gitlab server web interface at http://localhost. Change ('Hello world\n') to ('Hello new world\n') and commit the change directly in the gitlab web interface and then run the Jenkins build job again. After the change if you run the new node-web-app container, you will see the changes in the curl output.
 
 #### Cleanup
 To remove all docker images created by this:
