@@ -4,7 +4,7 @@ This docker-compose container set allows one to demonstrate the critical feature
 
 ### Prerequisites:
 
-To use this on a Mac or Windows host, make sure that this setting in Docker Desktop is enabled:
+To use this on a Windows host, make sure that this setting in Docker Desktop is enabled:
 "Expose daemon on tcp://localhost:2375 without TLS"
 
 ### Docker compose setup
@@ -92,7 +92,8 @@ In the box that appears in "Execute shell > Command" insert the following code:
 ```
 rm -rf $(ls -a | tail -n +3) #quick hack to clean up the folder on each job run, due to no workspace cleanup plugin installed yet
 git clone https://github.com/devopsdemonet/node-web-app.git
-export DOCKER_HOST=tcp://docker.for.win.localhost:2375 #on a mac change to: export DOCKER_HOST=tcp://docker.host.internal:2375
+#export DOCKER_HOST=tcp://docker.for.win.localhost:2375 #on windows uncomment this line
+cd $WORKSPACE/node-web-app
 docker build -t node-web-app:${BUILD_ID} .
 docker tag node-web-app:${BUILD_ID} node-web-app:latest
 ```
